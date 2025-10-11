@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
   api:
-    image: docker.io/thaleslj/organizandobolso-api:latest
+    image: docker.io/thaleslj/organizandobolso.api:latest
     container_name: organizandobolso-api
     restart: unless-stopped
     ports:
@@ -16,7 +16,7 @@ services:
       - ./logs:/app/logs
 
   admin:
-    image: docker.io/thaleslj/organizandobolso-admin:latest
+    image: docker.io/thaleslj/organizandobolso.admin:latest
     container_name: organizandobolso-admin
     restart: unless-stopped
     ports:
