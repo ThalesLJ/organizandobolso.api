@@ -1,0 +1,17 @@
+FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
+WORKDIR /src
+COPY OrganizandoBolso.sln ./
+COPY OrganizandoBolso.Domain/OrganizandoBolso.Domain.csproj OrganizandoBolso.Domain/
+COPY OrganizandoBolso.Application/OrganizandoBolso.Application.csproj OrganizandoBolso.Application/
+COPY OrganizandoBolso.Repository/OrganizandoBolso.Repository.csproj OrganizandoBolso.Repository/
+COPY OrganizandoBolso.Admin/OrganizandoBolso.Admin.csproj OrganizandoBolso.Admin/
+RUN dotnet restore OrganizandoBolso.Admin/OrganizandoBolso.Admin.csproj
+COPY . .
+RUN dotnet publish OrganizandoBolso.Admin/OrganizandoBolso.Admin.csproj -c Release -o /app/publish /p:UseAppHost=false
+
+FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS final
+WORKDIR /app
+ENV ASPNETCORE_URLS=http://+:8082
+EXPOSE 8082
+COPY --from=build /app/publish .
+ENTRYPOINT ["dotnet", "OrganizandoBolso.Admin.dll"]

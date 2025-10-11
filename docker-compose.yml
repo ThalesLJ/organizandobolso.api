@@ -1,0 +1,28 @@
+version: '3.8'
+
+services:
+  api:
+    image: docker.io/thaleslj/organizandobolso-api:latest
+    container_name: organizandobolso-api
+    restart: unless-stopped
+    ports:
+      - "5000:8081"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+      - ASPNETCORE_URLS=http://+:8081
+      - MongoDbSettings__ConnectionString=${MONGODB_URI}
+      - MongoDbSettings__DatabaseName=OrganizandoBolso
+    volumes:
+      - ./logs:/app/logs
+
+  admin:
+    image: docker.io/thaleslj/organizandobolso-admin:latest
+    container_name: organizandobolso-admin
+    restart: unless-stopped
+    ports:
+      - "5001:8082"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+      - ASPNETCORE_URLS=http://+:8082
+      - ApiSettings__BaseUrl=${API_BASE_URL}
+
