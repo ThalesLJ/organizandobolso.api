@@ -43,17 +43,7 @@ jobs:
           },
           "AllowedHosts": "*",
           "JWT_SECRET": "${{ secrets.JWT_SECRET }}",
-          "MONGODB_URI": "${{ secrets.MONGODB_URI }}",
-          "Kestrel": {
-            "Endpoints": {
-              "Http": {
-                "Url": "http://localhost:5000"
-              },
-              "Https": {
-                "Url": "https://localhost:5001"
-              }
-            }
-          }
+          "MONGODB_URI": "${{ secrets.MONGODB_URI }}"
         }
         EOF
 
