@@ -106,6 +106,16 @@ builder.Services.AddHostedService<OrganizandoBolso.Repository.HostedServices.Mon
 var app = builder.Build();
 
 app.UseSwagger();
+app.Use(async (context, next) =>
+{
+    var path = context.Request.Path.Value ?? string.Empty;
+    if (string.Equals(path, "/api/docs", StringComparison.OrdinalIgnoreCase) ||
+        string.Equals(path, "/api/docs/", StringComparison.OrdinalIgnoreCase))
+    {
+        context.Request.Path = "/api/docs/index.html";
+    }
+    await next();
+});
 app.UseSwaggerUI(c =>
 {
     c.SwaggerEndpoint("/swagger/v1/swagger.json", "OrganizandoBolso API v1");
