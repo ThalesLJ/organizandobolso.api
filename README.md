@@ -94,16 +94,7 @@ dotnet run
 }
 ```
 
-### Email
-```json
-{
-  "EmailSettings": {
-    "SmtpServer": "smtp.gmail.com",
-    "SmtpPort": 587,
-    "EnableSsl": true
-  }
-}
-```
+
 
 ## 📚 API Endpoints
 

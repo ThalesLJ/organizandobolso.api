@@ -54,7 +54,6 @@ builder.Services.Configure<MongoDbSettings>(options =>
     options.ConnectionString = builder.Configuration["MONGODB_URI"] ?? string.Empty;
     options.DatabaseName = "OrganizandoBolso";
 });
-builder.Services.Configure<EmailSettings>(builder.Configuration.GetSection("EmailSettings"));
 builder.Services.Configure<ApiSettings>(builder.Configuration.GetSection("ApiSettings"));
 
 builder.Services.AddCors(options =>
@@ -91,12 +90,10 @@ builder.Services.AddHttpContextAccessor();
 builder.Services.AddScoped<IBudgetRepository, BudgetRepository>();
 builder.Services.AddScoped<IExpenseRepository, ExpenseRepository>();
 builder.Services.AddScoped<ILogRepository, LogRepository>();
-builder.Services.AddScoped<ISettingRepository, SettingRepository>();
 
 builder.Services.AddScoped<IBudgetService, BudgetService>();
 builder.Services.AddScoped<IExpenseService, ExpenseService>();
 builder.Services.AddScoped<ILogService, LogService>();
-builder.Services.AddScoped<IEmailService, EmailService>();
 
 builder.Services.AddScoped<GlobalExceptionFilter>();
 builder.Services.AddScoped<AuditFilter>();

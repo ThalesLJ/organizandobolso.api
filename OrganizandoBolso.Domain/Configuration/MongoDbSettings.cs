@@ -20,5 +20,4 @@ public class CollectionNames
     public string Budgets { get; set; } = "Budgets";
     public string Expenses { get; set; } = "Expenses";
     public string Logs { get; set; } = "Logs";
-    public string Settings { get; set; } = "Settings";
 }
